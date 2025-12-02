@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import com.learn.foodapp.security.jwt.AuthEntryPointJwt;
 import com.learn.foodapp.security.jwt.AuthTokenFilter;
@@ -31,6 +32,15 @@ public class SecurityConfig {
 	{
 		httpSecurity
 		.csrf(csrf->csrf.disable())
+		.cors(cors -> cors.configurationSource(request -> {
+            CorsConfiguration config = new CorsConfiguration();
+            config.setAllowCredentials(true);
+            config.addAllowedOrigin("http://localhost:5173");
+            config.addAllowedHeader("*");
+            config.addAllowedMethod("*");
+            return config;
+        }))
+		
 		.authorizeHttpRequests(req->req
 		.requestMatchers(HttpMethod.POST, "/users/**","/auth/login").permitAll()
 		.anyRequest().authenticated()
