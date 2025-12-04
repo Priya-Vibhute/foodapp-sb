@@ -43,6 +43,7 @@ public class SecurityConfig {
 		
 		.authorizeHttpRequests(req->req
 		.requestMatchers(HttpMethod.POST, "/users/**","/auth/login").permitAll()
+		.requestMatchers(HttpMethod.GET,"/products/**","/categories/**","/product/**").permitAll()
 		.anyRequest().authenticated()
 		);
 		

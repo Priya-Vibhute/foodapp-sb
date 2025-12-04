@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.learn.foodapp.controllers.Role;
 import com.learn.foodapp.dtos.UserDto;
 import com.learn.foodapp.entities.AppRole;
+import com.learn.foodapp.entities.Cart;
 import com.learn.foodapp.entities.User;
+import com.learn.foodapp.repository.CartRepository;
 import com.learn.foodapp.repository.RoleRepository;
 import com.learn.foodapp.repository.UserRepository;
 
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private CartRepository cartRepository;
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		
@@ -43,6 +48,12 @@ public class UserServiceImpl implements UserService{
 	    
 	    
 	    User savedUser = userRepository.save(user);
+	    
+	    
+	    Cart cart = new Cart();
+	    cart.setUser(savedUser);
+	    cartRepository.save(cart);
+	    
 	    
 	    UserDto savedDto = modelMapper.map(savedUser, UserDto.class);
 	    
