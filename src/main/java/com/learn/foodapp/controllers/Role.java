@@ -2,6 +2,7 @@ package com.learn.foodapp.controllers;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.learn.foodapp.entities.AppRole;
 import com.learn.foodapp.entities.User;
 
@@ -28,6 +29,7 @@ public class Role {
 	@Enumerated(EnumType.STRING)
 	private AppRole roleName;
 	@OneToMany(mappedBy ="role" )
+
 	private List<User> users;
 		
 	

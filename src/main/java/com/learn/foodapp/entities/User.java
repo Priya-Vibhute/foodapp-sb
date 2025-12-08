@@ -7,8 +7,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.learn.foodapp.controllers.Role;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,7 +42,8 @@ public class User implements UserDetails {
 	
 	private int age;
 	
-	@OneToOne(mappedBy ="user" )
+	@OneToOne(mappedBy ="user",cascade = CascadeType.ALL )
+
 	private Cart cart;
 	
 	

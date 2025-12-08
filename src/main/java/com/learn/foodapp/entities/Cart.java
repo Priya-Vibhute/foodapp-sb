@@ -1,6 +1,10 @@
 package com.learn.foodapp.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +30,7 @@ public class Cart {
 	private List<Product> products;
 	
 	@OneToOne
+	@JsonManagedReference
 	private User user;
 	
 
