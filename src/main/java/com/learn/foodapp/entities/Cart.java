@@ -27,6 +27,7 @@ public class Cart {
 	private int id;
 	
 	@ManyToMany
+	@JsonManagedReference
 	private List<Product> products;
 	
 	@OneToOne

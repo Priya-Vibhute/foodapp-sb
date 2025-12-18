@@ -47,16 +47,16 @@ public class CartServiceImpl implements CartService{
 		
 		Cart cart = cartRepository.findByUser(user);
 		
-		
-		
-	
-		
 		cart.getProducts().add(product);
 		
-		cartRepository.save(cart);
-	
-		
+		cartRepository.save(cart);	
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 

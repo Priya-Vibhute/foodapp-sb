@@ -2,6 +2,7 @@ package com.learn.foodapp.entities;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.learn.foodapp.controllers.Role;
 
 import jakarta.persistence.CascadeType;
@@ -18,6 +20,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,12 +46,17 @@ public class User implements UserDetails {
 	private int age;
 	
 	@OneToOne(mappedBy ="user",cascade = CascadeType.ALL )
-
+	@JsonBackReference
 	private Cart cart;
 	
 	
 	@ManyToOne
+	@JsonManagedReference
 	private Role role;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonBackReference
+	private List<Order> orders;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
